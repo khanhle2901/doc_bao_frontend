@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
 
 import styles from './scss/Navigation.module.scss'
-import { NavLink } from 'react-router-dom'
+import { NavLink, generatePath } from 'react-router-dom'
 import routes from '../../configs/baseRoutes'
 
 const cx = classNames.bind(styles)
@@ -23,7 +23,7 @@ function Navigation() {
           return (
             <NavLink
               key={item.id}
-              to={routes.category.replace(':slug', item.slug)}
+              to={generatePath(routes.category, { slug: item.slug })}
               className={(nav) => cx('nav-item', { active: nav.isActive })}
             >
               <span className={cx('nav-title')}>{item.data}</span>
