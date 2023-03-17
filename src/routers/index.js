@@ -1,7 +1,13 @@
+import { lazy } from 'react'
+
 import routers from '../configs/baseRoutes'
-import Home from '../pages/Home'
-import Post from '../pages/Post'
-import WritePost from '../pages/WritePost'
+
+const AddCategory = lazy(() => import('../pages/AddCategory'))
+const Category = lazy(() => import('../pages/Category'))
+const CategoryTrash = lazy(() => import('../pages/CategoryTrash'))
+const Home = lazy(() => import('../pages/Home'))
+const Post = lazy(() => import('../pages/Post'))
+const WritePost = lazy(() => import('../pages/WritePost'))
 
 const publicRoutes = [
   {
@@ -10,7 +16,7 @@ const publicRoutes = [
   },
   {
     path: routers.category,
-    component: Home,
+    component: Category,
   },
   {
     path: routers.post,
@@ -18,11 +24,25 @@ const publicRoutes = [
   },
 ]
 
-const privateRoutes = [
-  {
-    path: routers.writePost,
-    component: WritePost,
-  },
-]
+const privateRoutes = {
+  adminRoutes: [
+    {
+      path: routers.addCategory,
+      component: AddCategory,
+    },
+    {
+      path: routers.categoryTrash,
+      component: CategoryTrash,
+    },
+  ],
+  writerRoutes: [
+    {
+      path: routers.writePost,
+      component: WritePost,
+    },
+  ],
+  censorRoutes: [],
+  normalUserRoutes: [],
+}
 
 export { publicRoutes, privateRoutes }

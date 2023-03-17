@@ -34,40 +34,32 @@ function WritePost() {
     return () => controller.abort()
   }, [])
 
+  const updateError = (err) => {
+    setError(err)
+    setTimeout(() => {
+      setError('')
+    }, 3000)
+  }
+
   const handleSubmitClick = (e) => {
     if (titleRef.current.value.trim() === '') {
-      setError('Tiêu đề trống!')
-      setTimeout(() => {
-        setError('')
-      }, 3000)
+      updateError('Tiêu đề trống!')
       return
     }
     if (decrRef.current.value.trim() === '') {
-      setError('Mô tả trống!')
-      setTimeout(() => {
-        setError('')
-      }, 3000)
+      updateError('Mô tả trống!')
       return
     }
     if (decrRef.current.value.length > 300) {
-      setError('Mô tả quá dài!')
-      setTimeout(() => {
-        setError('')
-      }, 3000)
+      updateError('Mô tả quá dài!')
       return
     }
     if (src === '') {
-      setError('Ảnh đại diện trống!')
-      setTimeout(() => {
-        setError('')
-      }, 3000)
+      updateError('Ảnh đại diện trống!')
       return
     }
     if (ckContent.trim() === '') {
-      setError('Nội dung trống!')
-      setTimeout(() => {
-        setError('')
-      }, 3000)
+      updateError('Nội dung trống!')
       return
     }
     const postData = async () => {
@@ -75,25 +67,35 @@ function WritePost() {
       // formData.append('id_category', selectCategoryValue)
       // formData.append('title', titleRef.current.value)
       formData.append('file', file)
-      formData.append('title', 'hello')
+      formData.append('title', titleRef.current.value)
+      formData.append('sort_description', decrRef.current.value)
+      formData.append('content', ckContent)
+      formData.append('id_category', selectCategoryValue)
       const resp = await axiosCt.postFile('/avartar-post', formData)
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value)
-      }
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(key, value)
+      // }
       console.log(resp)
+      if (resp === 'fail') {
+        updateError('Lỗi. Kiểm tra lại kích thước ảnh đại diện!')
+        return
+      }
+      // const response = await axiosCt.post('/post',{
+
+      // })
       return
-      const res = await axiosCt.post(
-        '/post',
-        // formData
-        {
-          id_category: selectCategoryValue,
-          title: titleRef.current.value,
-          sort_description: decrRef.current.value,
-          content: ckContent,
-          // file: file,
-        }
-      )
-      console.log(res)
+      // const res = await axiosCt.post(
+      //   '/post',
+      //   // formData
+      //   {
+      //     id_category: selectCategoryValue,
+      //     title: titleRef.current.value,
+      //     sort_description: decrRef.current.value,
+      //     content: ckContent,
+      //     // file: file,
+      //   }
+      // )
+      // console.log(res)
     }
     postData()
   }

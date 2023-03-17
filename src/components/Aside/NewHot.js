@@ -4,29 +4,34 @@ import { type as asideType } from './type'
 import styles from './Aside.module.scss'
 import { useLayoutEffect, useState } from 'react'
 import AsideItem from './AsideItem'
+import axiosCt from '../../configs/axiosCT'
 
 const cx = classNames.bind(styles)
 
 function NewHot({ type }) {
   const [title, setTitle] = useState('')
-  const [data, setData] = useState([])
+  const [posts, setPosts] = useState([])
   // console.log(process.env.REACT_APP_API_URL + `/post/new`)
   useLayoutEffect(() => {
     switch (type) {
       case asideType.new:
         setTitle('MỚI')
 
-        fetch(process.env.REACT_APP_API_URL + `/post/new`)
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res.data)
-            setData((prev) => res.data)
-          })
+        const fetchData = async () => {
+          const response = await axiosCt.get('/post/new')
+          console.log(response)
+          if (response !== 'fail' && response.code === 200) {
+            setPosts(() => response.data)
+          } else {
+            setPosts(() => [])
+          }
+        }
+        fetchData()
 
         break
       case asideType.hot:
         setTitle('HOT')
-        setData((prev) => [
+        setPosts((prev) => [
           {
             id: 1,
             title:
@@ -56,7 +61,7 @@ function NewHot({ type }) {
         break
       default:
         setTitle('')
-        setData((prev) => [])
+        setPosts((prev) => [])
         break
     }
   }, [type])
@@ -64,7 +69,7 @@ function NewHot({ type }) {
     <div className={cx('new-hot-wrapper')}>
       <h3 className={cx('title')}>{title}</h3>
       <div className={cx('content')}>
-        {data.map((item) => {
+        {posts.map((item) => {
           return <AsideItem key={item.id} data={item} />
         })}
       </div>

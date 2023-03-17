@@ -1,9 +1,6 @@
-import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
-import { generatePath } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 
-import routers from '../../configs/baseRoutes'
 import styles from './Home.module.scss'
 
 const Aside = lazy(() => import('../../components/Aside'))

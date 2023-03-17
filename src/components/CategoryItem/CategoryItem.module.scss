@@ -1,0 +1,44 @@
+.category {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--primary-color);
+  padding: 5px;
+  .category-name {
+    font-size: 1.8rem;
+  }
+  .category-action {
+    button {
+      font-size: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      border-radius: 4px;
+      aspect-ratio: 1;
+      border: 1px solid currentColor;
+      transition-duration: 0.3s;
+      cursor: pointer;
+      &.btn-category-delete {
+        // background-color: red;
+        color: red;
+        // border-color: currentColor;
+        &:hover {
+          background-color: red;
+          color: #fff;
+        }
+      }
+      &.btn-category-update {
+        color: #00f;
+        &:hover {
+          background-color: #00f;
+          color: #fff;
+        }
+      }
+      & + button {
+        margin-left: 5px;
+      }
+    }
+  }
+}

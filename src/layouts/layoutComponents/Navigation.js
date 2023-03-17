@@ -4,29 +4,32 @@ import classNames from 'classnames/bind'
 import styles from './scss/Navigation.module.scss'
 import { NavLink, generatePath } from 'react-router-dom'
 import routes from '../../configs/baseRoutes'
+import axiosCt from '../../configs/axiosCT'
+import { generatePathSlug } from '../../optionalFunction'
 
 const cx = classNames.bind(styles)
 
 function Navigation() {
   const [categories, setCategories] = useState([])
   useEffect(() => {
-    setCategories([
-      { id: 1, slug: 'tai-chinh', data: 'Tài chính' },
-      { id: 2, slug: 'the-thao', data: 'Thể thao' },
-    ])
+    const getListCategory = async () => {
+      const response = await axiosCt.get('/category')
+      console.log(response)
+      if (response.code === 200 && response !== 'fail') {
+        setCategories(response.data)
+      }
+    }
+    getListCategory()
   }, [])
 
   return (
     <div className={cx('wrapper')}>
       <nav className={cx('navigation')}>
         {categories.map((item) => {
+          const path = generatePath(routes.category, { id: item.id, slug: generatePathSlug(item.name) })
           return (
-            <NavLink
-              key={item.id}
-              to={generatePath(routes.category, { slug: item.slug })}
-              className={(nav) => cx('nav-item', { active: nav.isActive })}
-            >
-              <span className={cx('nav-title')}>{item.data}</span>
+            <NavLink key={item.id} to={path} className={(nav) => cx('nav-item', { active: nav.isActive })}>
+              <span className={cx('nav-title')}>{item.name}</span>
             </NavLink>
           )
         })}

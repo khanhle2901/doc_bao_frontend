@@ -34,19 +34,29 @@
       width: 100%;
       aspect-ratio: 1;
       object-fit: cover;
+      transition-duration: 0.3s;
+      &:hover {
+        scale: 1.1;
+      }
     }
   }
   .item-info {
     padding-left: 5px;
     .link {
       font-size: 1.6rem;
-      color: #000;
+      color: #222;
       word-break: break-word;
-      display: block;
+      display: inline-block;
+      transition-duration: 0.2s;
+      &:hover {
+        color: #000;
+        text-shadow: 0 1px 1px #555555aa;
+      }
     }
     .time {
       color: #aaa;
       font-size: 1.2rem;
+      display: block;
     }
   }
 }
