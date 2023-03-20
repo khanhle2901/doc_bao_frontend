@@ -8,6 +8,7 @@ const CategoryTrash = lazy(() => import('../pages/CategoryTrash'))
 const Home = lazy(() => import('../pages/Home'))
 const Post = lazy(() => import('../pages/Post'))
 const WritePost = lazy(() => import('../pages/WritePost'))
+const Profile = lazy(() => import('../pages/Profile'))
 
 const publicRoutes = [
   {
@@ -42,7 +43,12 @@ const privateRoutes = {
     },
   ],
   censorRoutes: [],
-  normalUserRoutes: [],
+  normalUserRoutes: [
+    {
+      path: routers.profile,
+      component: Profile,
+    },
+  ],
 }
 
 export { publicRoutes, privateRoutes }

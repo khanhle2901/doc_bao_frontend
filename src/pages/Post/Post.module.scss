@@ -5,5 +5,32 @@
   .content {
     width: 75%;
     flex-shrink: 0;
+    padding-right: 10px;
+    img {
+      max-width: 100%;
+    }
+    .title {
+      color: var(--primary-color);
+      padding: 10px 0;
+    }
+    .avartar {
+      width: 80%;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+      padding-right: 20px;
+      color: #333;
+      font-size: 1.4rem;
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
   }
 }

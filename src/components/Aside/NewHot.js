@@ -11,7 +11,6 @@ const cx = classNames.bind(styles)
 function NewHot({ type }) {
   const [title, setTitle] = useState('')
   const [posts, setPosts] = useState([])
-  // console.log(process.env.REACT_APP_API_URL + `/post/new`)
   useLayoutEffect(() => {
     switch (type) {
       case asideType.new:
@@ -19,7 +18,6 @@ function NewHot({ type }) {
 
         const fetchData = async () => {
           const response = await axiosCt.get('/post/new')
-          console.log(response)
           if (response !== 'fail' && response.code === 200) {
             setPosts(() => response.data)
           } else {

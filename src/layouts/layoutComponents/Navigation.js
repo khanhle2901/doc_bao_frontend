@@ -14,7 +14,6 @@ function Navigation() {
   useEffect(() => {
     const getListCategory = async () => {
       const response = await axiosCt.get('/category')
-      console.log(response)
       if (response.code === 200 && response !== 'fail') {
         setCategories(response.data)
       }

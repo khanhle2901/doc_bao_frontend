@@ -5,6 +5,7 @@ const routers = {
   writePost: '/post/write',
   addCategory: '/category/system',
   categoryTrash: '/category/trash',
+  profile: '/profile',
 }
 
 export default routers

@@ -6,6 +6,7 @@ import Search from './Search'
 import Navigation from './Navigation'
 import { Link } from 'react-router-dom'
 import routers from '../../configs/baseRoutes'
+import UserBar from './UserBar'
 
 const cx = classNames.bind(styles)
 
@@ -18,7 +19,7 @@ function Header() {
             <img src={logo} alt='docbao' />
           </Link>
           <Search />
-          <div>login</div>
+          <UserBar />
         </div>
       </div>
       <Navigation />

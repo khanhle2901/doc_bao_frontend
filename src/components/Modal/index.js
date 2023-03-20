@@ -4,10 +4,10 @@ import styles from './Modal.module.scss'
 
 const cx = classNames.bind(styles)
 
-function Modal({ children, onCancel, onOk }) {
+function Modal({ children, onCancel, onOk, onClick, isLoading }) {
   return (
     <div className={cx('wrapper')}>
-      <div className={cx('container')}>
+      <div className={cx('container', { isLoading: isLoading })} onClick={onClick}>
         <div className={cx('content')}>{children}</div>
         <div className={cx('action')}>
           <button className={cx('btn-cancel')} onClick={onCancel}>
